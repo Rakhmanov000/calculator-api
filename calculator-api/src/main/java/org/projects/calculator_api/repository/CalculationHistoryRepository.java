@@ -14,12 +14,12 @@ public interface CalculationHistoryRepository extends JpaRepository<CalculationH
 
 
     // Получение самых старых записей (для удаления)
-    @Query("SELECT c FROM CalculationHistory c ORDER BY c.timestamp ASC")
+    @Query("SELECT c FROM CalculationHistory c ORDER BY c.createdAt ASC")
     List<CalculationHistory> findOldestRecords(Pageable pageable);
 
     // Удаление самых старых записей
     @Modifying
     @Query("DELETE FROM CalculationHistory c WHERE c.id IN " +
-            "(SELECT c2.id FROM CalculationHistory c2 ORDER BY c2.timestamp ASC LIMIT :limit)")
+            "(SELECT c2.id FROM CalculationHistory c2 ORDER BY c2.createdAt ASC LIMIT :limit)")
     void deleteOldestRecords(int limit);
 }

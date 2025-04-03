@@ -16,8 +16,9 @@ public class ExpressionParser {
 
     public double parseExpressions(String exam) {
         exam = exam.replaceAll(" +","");
-        exam = exam.replaceAll("(?<=[0-9)])(?=\\()", "*");
-        exam = exam.replaceAll("(?<=\\))(?=[0-9])", "*");
+        exam = exam.replaceAll("(?<=[\\d)])(?=\\()", "*");
+        exam = exam.replaceAll("(?<=\\))(?=\\d)", "*");
+
         String[] array = exam.split("((?<=[-+*/()])|(?=[-+*/()]))");
         ArrayList<String> list = new ArrayList<>(Arrays.asList(array));
 
